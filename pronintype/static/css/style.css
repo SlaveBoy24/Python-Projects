@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: monospace; 
+    background-color: #323437;
+}
+
+input {
+    border: solid 2px black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.restart_form {
+    margin-top: 25px;
+}
+
+.text {
+    width: 900px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.caret {
+    position: absolute;
+    top: -200px;
+    background-color: #ffffff00;
+    color: yellow;
+    font-size: 1.5em;
+}
+
+#quest_text_output {
+    width: 900px;
+    font-size: 1.5em;
+    letter-spacing: .2rem;
+    text-align: left;
+}
+
+#cursor {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 700px;
+    width: 900px;
+    margin: 0 auto;
+}
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeTable</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <p><a href="">TITLE</a></p>
+            <ul id="menuPanel">
+                <li><a href="{% url 'showTable' num=1 %}">Типы устройств</a></li>
+                <li><a href="{% url 'showTable' num=2 %}">Устройства</a></li>
+                <li><a href="{% url 'showTable' num=3 %}">Офисы</a></li>
+                <li><a href="{% url 'showTable' num=4 %}">Роли</a></li>
+                <li><a href="{% url 'showTable' num=5 %}">Пользователи</a></li>
+                <li><a href="{% url 'showTable' num=6 %}">Записи</a></li>
+            </ul>
+        </div>
+    
+        <div class="body">
+        
+        </div>
+    
+        <div class="footer">
+            
+        </div>
+    </div>    
+</body>
+</html>

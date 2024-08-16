@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div class="caret">|</div>
+
+    <div class="content">
+        <div class="text">
+            <h3 id="quest_text"style="display:none;">{{ quest }}</h3>
+            <h3 id="quest_text_output" style="color:gray;">{{ quest }}</h3>
+        </div>
+
+        <form class="restart_form" action="{% url 'main_page' %}">
+            <input type="submit" value="restart"></input>
+        </form>
+        
+    </div>
+{% endblock  %}
+
+{% block js_block %}
+    <script>
+        var index = 0;
+        var symbols = [];
+
+        $(document).keydown(function(event) {
+            let regex = /[A-z]|[А-я]/g
+            key = event.key + "";
+            check = key.match(regex)
+            if (check == null && key != " " || key.length != 1 && key != "Backspace")
+                return;
+
+            current_text = $("#quest_text").text();
+
+            if (key == "Backspace") {
+                console.log("LETTER BACK")
+                index--;
+                symbols.pop()
+                if (index <= 0) index = 0;
+            }
+            else {
+
+                if ((key == " " && current_text.charAt(index) == " ") || (key == current_text[index])) {
+                    symbols.push(true);
+                }
+                else {
+                    symbols.push(false);
+                }
+
+                index++;
+            }
+
+            output = '';
+            after = '<span id="current_letter">' + current_text.charAt(index) + '</span>';
+            after += '<span>' + current_text.substring(index+1, current_text.length) + '</span>';
+        
+            for (let i = 0; i < index; i++) {
+                if (symbols[i])
+                    output += '<span style="color: green;">'+current_text.charAt(i)+'</span>';
+                else
+                    output += '<span style="text-decoration:underline; text-decoration-color: red; color: red;">'+current_text.charAt(i)+'</span>';
+            }
+
+            output += after;
+
+            $("#quest_text_output").html(output);
+
+            let current_char_offset = $("#current_letter").offset();
+            
+            console.log(current_char_offset);
+            
+            $(".caret").css("left", (current_char_offset.left - 5) + "px");
+            $(".caret").css("top", current_char_offset.top + "px");
+        });
+    </script>
+{% endblock %}
+

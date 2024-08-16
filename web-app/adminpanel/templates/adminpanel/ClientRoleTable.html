@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeTable</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <p><a href="">TITLE</a></p>
+            <ul id="menuPanel">
+                <li><a href="{% url 'showTable' num=1 %}">Типы устройств</a></li>
+                <li><a href="{% url 'showTable' num=2 %}">Устройства</a></li>
+                <li><a href="{% url 'showTable' num=3 %}">Офисы</a></li>
+                <li><a href="{% url 'showTable' num=4 %}">Роли</a></li>
+                <li><a href="{% url 'showTable' num=5 %}">Пользователи</a></li>
+                <li><a href="{% url 'showTable' num=6 %}">Записи</a></li>
+            </ul>
+        </div>
+    
+        <div class="body">
+            <table>
+                <tr>
+                    <td>
+                        <p>Уникальный номер</p>
+                    </td>
+
+                    <td>
+                        <p>Название</p>
+                    </td>
+
+                    <td>
+                        <p>Изменить</p>
+                    </td>
+
+                    <td>
+                        <p>Удалить</p>
+                    </td>
+                </tr>
+
+                {% for object in data %}
+                    <tr>
+                        <td>
+                            <p>{{ object.id }}</p>
+                        </td>
+
+                        <td>
+                            <p>{{ object.name }}</p>
+                        </td>
+
+                        <form action="{% url 'updateRecord' num=4 pk=object.id%}" method=POST>
+                            {% csrf_token %}
+                            <td>
+                                <input type=submit value="Изменить">
+                            </td>
+                        </form>
+
+                        <form action="{% url 'deleteRecord' num=4 pk=object.id %}" method=POST>
+                            {% csrf_token %}
+                            <td>
+                                <button value={{ object.id }} name="pk">Удалить</button>
+                            </td>                            
+                        </form>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <form action="{% url 'showTable' num=4 %}" method=POST>
+                {% csrf_token %}
+                <div class="selectPage">
+                    <p>Страница:</p>
+                    <input id="page_num" name="page_num" type="number" value={{ numPage }} min = 1 max = {{ maxPages }}>
+                    <input type="submit" value="Ввод">
+                </div>
+            </form>
+
+            <form action="{% url 'updateRecord' num=4 pk=0 %}" method=POST>
+                {% csrf_token %}
+                <div class="selectPage">
+                    <input type="submit" value="Добавить">
+                </div>
+            </form>
+        </div>
+    
+        <div class="footer">
+            
+        </div>
+    </div>    
+</body>
+</html>
